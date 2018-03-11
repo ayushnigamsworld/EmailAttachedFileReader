@@ -1,0 +1,41 @@
+﻿<Page x:Class="EmailAttach.EmailDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EmailAttach"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="EmailDetails">
+    
+    <Page.Style>
+        <Style TargetType="Page">
+            <Setter Property="Background" Value="#7bd3fc"></Setter>
+        </Style>
+    </Page.Style>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="#7bd3fc">
+        <TextBlock Text="Enter your credentials :" FontSize="13"></TextBlock>
+        <StackPanel Width="300" Margin="0 5 0 0" Orientation="Horizontal">
+            <TextBlock FontWeight="SemiBold" FontSize="15">Email :</TextBlock>
+            <TextBox Name="txtEmail" Margin="47 0 0 0" Width="200"></TextBox>
+        </StackPanel>
+        <StackPanel Width="300" Margin="0 10 0 0" Orientation="Horizontal">
+            <TextBlock FontWeight="SemiBold" FontSize="15">Password :</TextBlock>
+            <PasswordBox Name="txtPassword" Margin="19 0 0 0" Width="200"></PasswordBox>
+        </StackPanel>
+        <Button Name="btnGetAttach" Click="btnGetAttach_Click" Content="Get Attachments" >
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#7aaee2"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                    <Setter Property="Margin" Value="92 10 70 0"></Setter>
+                    <Setter Property="Height" Value="22"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True"></Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </StackPanel>
+</Page>
