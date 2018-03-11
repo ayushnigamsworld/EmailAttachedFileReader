@@ -5,11 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmailAttach"
         mc:Ignorable="d"
-        Loaded="Window_Loaded"
-        
-        WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="400" Width="600">
-
-    <Frame Name="mainFrame" NavigationUIVisibility="Hidden"></Frame>
-    
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock>Email :</TextBlock>
+            <TextBox Name="txtEmail" Width="200"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock>Password :</TextBlock>
+            <PasswordBox Name="txtPassword" Width="200"></PasswordBox>
+        </StackPanel>
+        <Button Name="btnGetAllAttach" Click="btnGetAllAttach_Click" Margin="0 10" Width="150">Get All Attachments</Button>
+    </StackPanel>
 </Window>
