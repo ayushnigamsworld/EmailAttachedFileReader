@@ -32,9 +32,10 @@ namespace EmailAttach
         {
             try
             {
-                if (txtUserName.Text == loginUser && txtUserPwd.Password == loginUser)
+                if (txtUserName.Text == loginUser && txtUserPwd.Password == loginPwd)
                 {
-                    NavigationService.Navigate(new Uri("EmailDetails.xaml", UriKind.RelativeOrAbsolute));
+                    EmailDetails emailDetails = new EmailDetails(txtUserName.Text);
+                    this.NavigationService.Navigate(emailDetails);
                 }
                 else
                 {
