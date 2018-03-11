@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmailAttach"
         mc:Ignorable="d"
+        Icon="Images\targaryian.png"
         Loaded="Window_Loaded"
-        
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="400" Width="600">
+        Title="Targaryian" Height="400" Width="600">
 
     <Frame Name="mainFrame" NavigationUIVisibility="Hidden"></Frame>
     
