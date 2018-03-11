@@ -15,27 +15,29 @@
         </Style>
     </Page.Style>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Name="txtLoggedInUser" Margin="0 0 10 0" HorizontalAlignment="Right" FontWeight="ExtraLight" FontSize="15">vhmhv</TextBlock>
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock Name="txtLoggedInUser" Margin="10 5 0 0" HorizontalAlignment="Left" Foreground="#054c6d" FontWeight="ExtraLight" FontSize="13"></TextBlock>
             <Button Name="btnLogout" Click="btnLogout_Click" Content="Logout" >
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="{x:Null}"></Setter>
                         <Setter Property="Foreground" Value="#000000"/>
                         <Setter Property="BorderThickness" Value="0"></Setter>
-                        <Setter Property="Margin" Value="0 5 10 0"></Setter>
+                        <Setter Property="Margin" Value="0 0 0 0"></Setter>
                         <Setter Property="Width" Value="50"></Setter>
                         <Setter Property="Height" Value="22"></Setter>
                         <Setter Property="HorizontalAlignment" Value="Right"></Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#295e93"></Setter>
                                 <Setter Property="Foreground" Value="#ffffff"/>
-                            </Trigger>                            
+                            </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
-        </StackPanel>
+        </DockPanel>           
+            
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="#7bd3fc">
             <TextBlock Text="Enter your credentials :" FontSize="13"></TextBlock>
             <StackPanel Width="300" Margin="0 5 0 0" Orientation="Horizontal">
