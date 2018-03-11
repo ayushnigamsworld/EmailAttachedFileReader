@@ -23,10 +23,36 @@ namespace EmailAttach
     public partial class EmailDetails : Page
     {
         int j = 0;
+        string LoggedInUser = string.Empty; 
 
-        public EmailDetails()
+        public EmailDetails(string user)
         {
+            LoggedInUser = user;
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                txtLoggedInUser.Text = LoggedInUser;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NavigationService.Navigate(new Uri("Login.xaml", UriKind.RelativeOrAbsolute));
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void btnGetAttach_Click(object sender, RoutedEventArgs e)
@@ -101,6 +127,6 @@ namespace EmailAttach
             {
                 Console.WriteLine(ep.Message);
             }
-        }
+        }         
     }
 }
