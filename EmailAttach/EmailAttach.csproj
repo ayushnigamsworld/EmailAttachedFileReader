@@ -40,6 +40,9 @@
     <Reference Include="Mail, Version=3.0.18026.1647, Culture=neutral, PublicKeyToken=6dc438ab78a525b3, processorArchitecture=MSIL">
       <HintPath>..\packages\Mail.dll.3.0.18026.1647\lib\net45\Mail.dll</HintPath>
     </Reference>
+    <Reference Include="S22.Imap">
+      <HintPath>..\packages\Watcher\S22.Imap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -68,12 +71,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FileNameProvider.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NewMailWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

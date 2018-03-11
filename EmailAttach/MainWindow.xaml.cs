@@ -24,46 +24,41 @@ namespace EmailAttach
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Variables
+        NewMailWatcher _objMailWatcher = null;
+        static MainWindow _objMainWindow = null;
+        Action HandlNewMail;
+        #endregion
         public MainWindow()
         {
             InitializeComponent();
         }
+        private void Init()
+        {
+            try
+            {
+                HandlNewMail = NewMailHandler;
+                _objMainWindow = this;
+                _objMailWatcher = new NewMailWatcher();
+                _objMailWatcher.NewMail += _objMailWatcher_NewMail;
+                _objMailWatcher.StartReceiving(txtEmail.Text,txtPassword.Password);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void NewMailHandler()
+        {
+            btnGetAllAttach_Click(null, null);
+        }
+        private void _objMailWatcher_NewMail()
+        {
+            _objMainWindow.Dispatcher.Invoke(HandlNewMail);
+        }
 
         private void btnGetAllAttach_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    string emailAdd = txtEmail.Text;
-            //    string password = txtPassword.Password;
-            //    using (Imap imap = new Imap())
-            //    {
-            //        imap.Connect("imap.gmail.com");   // or ConnectSSL for SSL
-            //        imap.UseBestLogin(emailAdd, password);
-            //        imap.SelectInbox();
-            //        List<long> uids = imap.Search(Flag.All);
-            //        foreach (long uid in uids)
-            //        {
-            //            IMail email = new MailBuilder()
-            //                .CreateFromEml(imap.GetMessageByUID(uid));
-
-            //            Console.WriteLine(email.Subject);
-
-            //            // save all attachments to disk
-            //            foreach (MimeData mime in email.Attachments)
-            //            {
-            //                mime.Save(mime.SafeFileName);
-            //            }
-            //        }
-            //        imap.Close();
-            //    }
-
-            //}
-            //catch (Exception ex)
-            //{
-            //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            //}
-
-
             // Create a folder named "inbox" under current directory
             // to save the email retrieved.
             int j = 0;
@@ -90,48 +85,17 @@ namespace EmailAttach
             try
             {
                 oClient.Connect(oServer);
-                MailInfo[] infos = oClient.GetMailInfos();
-                for (int i = 0; i < infos.Length; i++)
+
+                List<MailInfo> lstInfo = oClient.GetMailInfos().Where(info=>oClient.GetMail(info).ReceivedDate.Date==DateTime.Now.Date).ToList();
+
+                foreach(MailInfo info in lstInfo)
                 {
-                    MailInfo info = infos[i];
-                    Console.WriteLine("Index: {0}; Size: {1}; UIDL: {2}",
-                        info.Index, info.Size, info.UIDL);
-
-                    // Download email from GMail IMAP4 server
-                    Mail oMail = oClient.GetMail(info);
-
-                    Console.WriteLine("From: {0}", oMail.From.ToString());
-                    Console.WriteLine("Subject: {0}\r\n", oMail.Subject);
-
-                    string[] attachmentName = new string[10];
-                    foreach (var item in oMail.Attachments)
-                    {                        
-                        attachmentName[j] = item.Name;                        
-                    }
-
-                    foreach (var item in oMail.Attachments)
+                    Mail thismail = oClient.GetMail(info);
+                    foreach (var item in thismail.Attachments)
                     {
-
-                        item.SaveAs(item.Name,true);
+                        item.SaveAs(item.Name, true);
                     }
-
-                    // Generate an email file name based on date time.
-                    System.DateTime d = System.DateTime.Now;
-                    System.Globalization.CultureInfo cur = new
-                        System.Globalization.CultureInfo("en-US");
-                    string sdate = d.ToString("yyyyMMddHHmmss", cur);
-                    string fileName = String.Format("{0}\\{1}{2}{3}.eml",
-                        mailbox, sdate, d.Millisecond.ToString("d3"), i);
-
-                    // Save email to local disk
-                    oMail.SaveAs(fileName, true);
-
-                    // Mark email as deleted in GMail account.
-                    //oClient.Delete(info);
-
-                    j++;
                 }
-
                 // Quit and purge emails marked as deleted from Gmail IMAP4 server.
                 oClient.Quit();
 
@@ -141,6 +105,13 @@ namespace EmailAttach
             {
                 Console.WriteLine(ep.Message);
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtEmail.Text = "targaryian@gmail.com";
+            txtPassword.Password = "asdfghjklmnbvcxz";
+            Init();
         }
     }
 }
