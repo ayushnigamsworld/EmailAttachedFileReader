@@ -22,7 +22,7 @@
             <TextBlock FontWeight="SemiBold" FontSize="15">Password :</TextBlock>
             <PasswordBox Name="txtUserPwd" Margin="19 0 0 0" Width="150"></PasswordBox>
         </StackPanel>
-        <Button Name="btnLogin" Click="btnLogin_Click" Content="Login" >
+        <Button Name="btnLogin" Click="btnLogin_Click" Content="Login" IsDefault="True">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="#7aaee2"></Setter>
